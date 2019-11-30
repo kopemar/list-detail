@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">List and Detail</string>
+    <string name="repository_name">repository-name</string>
+    <string name="repository_date">2016-09-02T20:55:15Z</string>
 </resources>

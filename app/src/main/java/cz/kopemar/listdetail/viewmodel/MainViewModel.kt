@@ -9,19 +9,16 @@ import cz.kopemar.listdetail.rest.provideRetrofit
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
 
-class MainViewModel: ViewModel() {
+class MainViewModel : ViewModel() {
+
+    private lateinit var apiService: GitHubService
 
     init {
         connect()
     }
 
-    private lateinit var apiService: GitHubService
-
-    private lateinit var retrofit: Retrofit
-
-    fun doSomething() {
+    fun getAllRepos() {
         val call = apiService.getAllRepos()
 
         call.enqueue(object : Callback<List<Repository>> {
@@ -29,15 +26,17 @@ class MainViewModel: ViewModel() {
                 t.localizedMessage
             }
 
-            override fun onResponse(call: Call<List<Repository>>, response: Response<List<Repository>>) {
+            override fun onResponse(
+                call: Call<List<Repository>>,
+                response: Response<List<Repository>>
+            ) {
                 Log.i("retrofit", response.body().toString())
             }
         })
-
     }
 
     private fun connect() {
-        retrofit = provideRetrofit(provideOkHttpClient())
+        val retrofit = provideRetrofit(provideOkHttpClient())
         apiService = retrofit.create(GitHubService::class.java)
     }
 
