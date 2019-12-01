@@ -1,6 +1,8 @@
 package cz.kopemar.listdetail.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import cz.kopemar.listdetail.model.Repository
 import cz.kopemar.listdetail.rest.GitHubService
@@ -18,21 +20,24 @@ class MainViewModel : ViewModel() {
         connect()
     }
 
-    fun getAllRepos() {
+    fun getAllRepos(): LiveData<List<Repository>> {
         val call = apiService.getAllRepos()
 
-        call.enqueue(object : Callback<List<Repository>> {
-            override fun onFailure(call: Call<List<Repository>>, t: Throwable) {
-                t.localizedMessage
-            }
+        val data = MediatorLiveData<List<Repository>>()
 
+        call.enqueue(object : Callback<List<Repository>> {
             override fun onResponse(
                 call: Call<List<Repository>>,
                 response: Response<List<Repository>>
             ) {
-                Log.i("retrofit", response.body().toString())
+                if (response.isSuccessful) data.postValue(response.body())
+            }
+
+            override fun onFailure(call: Call<List<Repository>>, t: Throwable) {
+                t.localizedMessage
             }
         })
+        return data
     }
 
     private fun connect() {

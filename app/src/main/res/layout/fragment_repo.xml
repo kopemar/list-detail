@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <cz.kopemar.listdetail.views.ListView
+        android:id="@+id/vRepositoriesList"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
