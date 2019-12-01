@@ -1,26 +1,21 @@
 package cz.kopemar.listdetail.viewmodel
 
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.ViewModel
+import cz.kopemar.listdetail.model.Branch
 import cz.kopemar.listdetail.model.CommitWrapper
-import cz.kopemar.listdetail.rest.GitHubService
-import cz.kopemar.listdetail.rest.provideOkHttpClient
-import cz.kopemar.listdetail.rest.provideRetrofit
-import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder
+import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder.Companion.branches
 import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder.Companion.commits
-import cz.kopemar.listdetail.viewmodel.holder.RepositoriesHolder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RepositoryViewModel : ViewModel() {
+class RepositoryViewModel : BaseViewModel() {
 
-    private lateinit var apiService: GitHubService
-
-    private var repositoryName = CommitsHolder.repo
-
-    init {
-        connect()
+    fun getAllBranchesInRepo(repo: String): MediatorLiveData<List<Branch>> {
+        if (branches == null) {
+            return fetchAllBranches(repo)
+        }
+        return branches!!
     }
 
     fun getAllCommitsInRepo(repo: String): MediatorLiveData<List<CommitWrapper>> {
@@ -30,8 +25,29 @@ class RepositoryViewModel : ViewModel() {
         return commits!!
     }
 
+    private fun fetchAllBranches(repo: String): MediatorLiveData<List<Branch>> {
+        val call = apiService.getBranchesInRepo(repo)
+
+        branches = MediatorLiveData()
+
+        call.enqueue(object : Callback<List<Branch>> {
+            override fun onResponse(
+                call: Call<List<Branch>>,
+                response: Response<List<Branch>>
+            ) {
+                if (response.isSuccessful) branches!!.postValue(response.body())
+            }
+
+            override fun onFailure(call: Call<List<Branch>>, t: Throwable) {
+                t.localizedMessage
+            }
+        })
+
+        return branches!!
+    }
+
     private fun fetchAllCommits(repo: String): MediatorLiveData<List<CommitWrapper>> {
-        val call = apiService.getAllCommitsInRepo(repo)
+        val call = apiService.getCommitsInRepo(repo, limit)
 
         commits = MediatorLiveData()
 
@@ -51,8 +67,7 @@ class RepositoryViewModel : ViewModel() {
         return commits!!
     }
 
-    private fun connect() {
-        val retrofit = provideRetrofit(provideOkHttpClient())
-        apiService = retrofit.create(GitHubService::class.java)
+    companion object {
+        const val limit = 10
     }
 }
