@@ -13,25 +13,27 @@ class ListView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
+    var listener: ListViewHolder.OnListItemClickedListener? = null
+
     init {
         View.inflate(context, R.layout.view_list, this)
     }
 
-    var dataset : List<Repository> = ArrayList()
-    set(value){
-        field = value
-        vListView.apply {
-            adapter = ListViewAdapter(dataset)
+    var dataset: List<Repository> = ArrayList()
+        set(value) {
+            field = value
+            vListView.apply {
+                adapter = ListViewAdapter(dataset, listener)
+            }
         }
-    }
 
     override fun onFinishInflate() {
         super.onFinishInflate()
 
         vListView.apply {
-            adapter = ListViewAdapter(dataset)
+            adapter = ListViewAdapter(dataset, listener)
             layoutManager = LinearLayoutManager(context)
         }
-
     }
+
 }

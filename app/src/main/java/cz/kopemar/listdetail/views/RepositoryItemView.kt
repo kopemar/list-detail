@@ -7,7 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import cz.kopemar.listdetail.R
 import kotlinx.android.synthetic.main.view_item.view.*
 
-class ItemView @JvmOverloads constructor(
+class RepositoryItemView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
@@ -22,5 +22,6 @@ class ItemView @JvmOverloads constructor(
     fun setUpdated(date: String) {
         vRepositoryUpdated.text = date
     }
+
 
 }
