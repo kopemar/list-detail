@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <cz.kopemar.listdetail.views.ListView
+    <cz.kopemar.listdetail.views.ItemsListView
         android:id="@+id/vRepositoriesList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

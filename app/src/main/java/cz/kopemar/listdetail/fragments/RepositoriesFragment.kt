@@ -11,16 +11,16 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import cz.kopemar.listdetail.R
-import cz.kopemar.listdetail.RepositoryActivity
+import cz.kopemar.listdetail.RepositoryDetailActivity
 import cz.kopemar.listdetail.model.Repository
 import cz.kopemar.listdetail.viewmodel.MainViewModel
 import cz.kopemar.listdetail.viewmodel.holder.RepositoriesHolder.Companion.repositories
-import cz.kopemar.listdetail.views.ListViewAdapter
-import cz.kopemar.listdetail.views.ListViewHolder
-import kotlinx.android.synthetic.main.fragment_repo.*
+import cz.kopemar.listdetail.views.adapters.RepositoryListViewAdapter
+import cz.kopemar.listdetail.views.listener.OnListItemClickedListener
+import kotlinx.android.synthetic.main.fragment_repo_list.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class RepositoriesFragment: Fragment(), ListViewHolder.OnListItemClickedListener {
+class RepositoriesFragment: Fragment(), OnListItemClickedListener {
 
     private val vm by viewModel<MainViewModel>()
 
@@ -29,7 +29,7 @@ class RepositoriesFragment: Fragment(), ListViewHolder.OnListItemClickedListener
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_repo, container, false)
+        return inflater.inflate(R.layout.fragment_repo_list, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -38,7 +38,7 @@ class RepositoriesFragment: Fragment(), ListViewHolder.OnListItemClickedListener
         vRepositoriesList.listener = this
 
         vm.getAllRepos().observe(this, Observer<List<Repository>> {
-            vRepositoriesList.dataset = it
+            vRepositoriesList.adapter = RepositoryListViewAdapter(it, this)
         })
     }
 
@@ -49,9 +49,13 @@ class RepositoriesFragment: Fragment(), ListViewHolder.OnListItemClickedListener
     }
 
     private fun startIntent(context: Context, position: Int) {
-        Log.e("Adapter", "start intent")
-        val intent = Intent(context, RepositoryActivity::class.java)
-        intent.putExtra(ListViewAdapter.intent_text, repositories?.value?.get(position)?.name)
+        val intent = Intent(context, RepositoryDetailActivity::class.java)
+
+        intent.putExtra(intent_text, repositories?.value?.get(position)?.name)
         ContextCompat.startActivity(context, intent, null)
+    }
+
+    companion object {
+        const val intent_text = "OPEN_REPO"
     }
 }

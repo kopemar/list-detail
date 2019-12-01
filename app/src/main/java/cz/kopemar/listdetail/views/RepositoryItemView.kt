@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.view_item.view.*
 
 class RepositoryItemView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : ConstraintLayout(context, attrs, defStyleAttr) {
+) : ItemView(context, attrs, defStyleAttr) {
 
     init {
         View.inflate(context, R.layout.view_item, this)
