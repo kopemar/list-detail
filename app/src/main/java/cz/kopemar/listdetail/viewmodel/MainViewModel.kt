@@ -1,6 +1,5 @@
 package cz.kopemar.listdetail.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
@@ -14,6 +13,8 @@ import retrofit2.Response
 
 class MainViewModel : ViewModel() {
 
+    var repositories = RepositoriesHolder.repositories
+
     private lateinit var apiService: GitHubService
 
     init {
@@ -21,23 +22,31 @@ class MainViewModel : ViewModel() {
     }
 
     fun getAllRepos(): LiveData<List<Repository>> {
+        if (repositories == null) {
+            return fetchAllRepos()
+        }
+        return repositories!!
+    }
+
+    private fun fetchAllRepos(): MediatorLiveData<List<Repository>> {
         val call = apiService.getAllRepos()
 
-        val data = MediatorLiveData<List<Repository>>()
+        RepositoriesHolder.repositories = MediatorLiveData()
 
         call.enqueue(object : Callback<List<Repository>> {
             override fun onResponse(
                 call: Call<List<Repository>>,
                 response: Response<List<Repository>>
             ) {
-                if (response.isSuccessful) data.postValue(response.body())
+                if (response.isSuccessful) RepositoriesHolder.repositories!!.postValue(response.body())
             }
 
             override fun onFailure(call: Call<List<Repository>>, t: Throwable) {
                 t.localizedMessage
             }
         })
-        return data
+
+        return RepositoriesHolder.repositories!!
     }
 
     private fun connect() {

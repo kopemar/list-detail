@@ -8,14 +8,12 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val vm by viewModel<MainViewModel>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction().add(R.id.vFragmentFrame, RepositoriesFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.vFragmentFrame, RepositoriesFragment()).commit()
     }
 
 }
