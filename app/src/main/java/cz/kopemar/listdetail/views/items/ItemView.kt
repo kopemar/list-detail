@@ -1,4 +1,4 @@
-package cz.kopemar.listdetail.views
+package cz.kopemar.listdetail.views.items
 
 import android.content.Context
 import android.util.AttributeSet

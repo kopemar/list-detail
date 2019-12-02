@@ -2,7 +2,7 @@ package cz.kopemar.listdetail.views.adapters
 
 import android.view.ViewGroup
 import cz.kopemar.listdetail.model.Repository
-import cz.kopemar.listdetail.views.RepositoryItemView
+import cz.kopemar.listdetail.views.items.RepositoryItemView
 import cz.kopemar.listdetail.views.listener.OnListItemClickedListener
 import cz.kopemar.listdetail.views.viewholder.RepoListViewHolder
 

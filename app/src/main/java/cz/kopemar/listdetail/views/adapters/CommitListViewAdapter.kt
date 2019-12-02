@@ -2,7 +2,7 @@ package cz.kopemar.listdetail.views.adapters
 
 import android.view.ViewGroup
 import cz.kopemar.listdetail.model.CommitWrapper
-import cz.kopemar.listdetail.views.CommitItemView
+import cz.kopemar.listdetail.views.items.CommitItemView
 import cz.kopemar.listdetail.views.listener.OnListItemClickedListener
 import cz.kopemar.listdetail.views.viewholder.CommitListViewHolder
 

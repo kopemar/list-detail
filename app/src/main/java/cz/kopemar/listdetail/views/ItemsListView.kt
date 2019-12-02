@@ -20,7 +20,6 @@ class ItemsListView @JvmOverloads constructor(
     set(value) {
         field = value
         vListView.adapter = value
-
     }
 
     init {
