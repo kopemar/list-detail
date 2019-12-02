@@ -19,7 +19,7 @@ class CommitItemView @JvmOverloads constructor(
     }
 
     fun setCommitDate(date: String) {
-        vCommitMessage.text = date
+        vCommitDate.text = date
     }
 
 }

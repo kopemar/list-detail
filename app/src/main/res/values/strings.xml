@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">List and Detail</string>
     <string name="repository_name">repository-name</string>
+    <string name="commit_message">Added new super long commit message to test commit message displaying. \n\nHope it works! </string>
     <string name="repository_date">2016-09-02T20:55:15Z</string>
 </resources>

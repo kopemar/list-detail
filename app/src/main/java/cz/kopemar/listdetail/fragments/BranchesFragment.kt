@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import cz.kopemar.listdetail.model.Branch
 import cz.kopemar.listdetail.viewmodel.RepositoryViewModel
-import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder
 import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder.Companion.branches
 import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder.Companion.repo
 import cz.kopemar.listdetail.views.adapters.BranchViewAdapter

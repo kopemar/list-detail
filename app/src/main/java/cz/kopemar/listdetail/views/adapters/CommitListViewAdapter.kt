@@ -24,6 +24,7 @@ class CommitListViewAdapter(private val commits: List<CommitWrapper>, var listen
     override fun onBindViewHolder(holder: CommitListViewHolder, position: Int) {
         holder.commitItemView.apply {
             setCommitMessage(commits[position].commit.message)
+            setCommitDate(commits[position].commit.committer.date)
         }
     }
 

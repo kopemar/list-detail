@@ -3,20 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_64dp">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/vCommitMessage"
-        style="@style/Layout.Wrapped.H1.MarginS8"
+        style="@style/Layout.Fit.H2.Margin8"
         app:layout_constraintBottom_toTopOf="@id/vCommitDate"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/repository_name" />
+        tools:text="@string/commit_message" />
 
     <TextView
         android:id="@+id/vCommitDate"
-        style="@style/Layout.Wrapped.Margin8"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/_8dp"
+        android:layout_marginEnd="@dimen/_8dp"
+        android:layout_marginBottom="@dimen/_8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vCommitMessage"
@@ -25,7 +29,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1dp"
-        android:background="@color/black_64"
+        android:background="@color/black_16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
