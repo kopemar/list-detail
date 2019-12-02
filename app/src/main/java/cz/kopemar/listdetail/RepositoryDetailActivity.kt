@@ -3,6 +3,7 @@ package cz.kopemar.listdetail
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import cz.kopemar.listdetail.fragments.BranchesFragment
@@ -31,16 +32,16 @@ class RepositoryDetailActivity: AppCompatActivity() {
         setContentView(R.layout.activity_repository)
 
         repo = intent.getStringExtra(RepositoriesFragment.intent_text)
+        setSupportActionBar(findViewById(R.id.vToolbar))
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         vViewPager.adapter = BaseFragmentAdapter(fragments, supportFragmentManager)
         vTabs.setupWithViewPager(vViewPager)
     }
 
-
-
-    override fun onNavigateUp(): Boolean {
-        return finishActivity()
+    override fun onBackPressed() {
+        finishActivity()
     }
 
     override fun onSupportNavigateUp(): Boolean {

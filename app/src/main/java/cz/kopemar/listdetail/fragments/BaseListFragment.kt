@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import cz.kopemar.listdetail.R
+import kotlinx.android.synthetic.main.fragment_list.*
 
 abstract class BaseListFragment: Fragment() {
     override fun onCreateView(
@@ -16,5 +17,19 @@ abstract class BaseListFragment: Fragment() {
         return inflater.inflate(R.layout.fragment_list, container, false)
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        waitForResponse()
+
+        vSwipeRefresh.setOnRefreshListener {
+            refresh()
+        }
+    }
+
     open fun getFragmentName() = "Base Fragment"
+
+    abstract fun waitForResponse()
+
+    abstract fun refresh()
 }

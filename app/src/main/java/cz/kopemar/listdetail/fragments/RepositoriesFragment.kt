@@ -18,14 +18,23 @@ class RepositoriesFragment: BaseListFragment(), OnListItemClickedListener {
 
     private val vm by viewModel<MainViewModel>()
 
+    override fun waitForResponse() {
+        vSwipeRefresh.isRefreshing = true
+        vm.getAllRepos().observe(this, Observer<List<Repository>> {
+            vList.adapter = RepositoryListViewAdapter(it, this)
+            if (vSwipeRefresh.isRefreshing) vSwipeRefresh.isRefreshing = false
+        })
+    }
+
+    override fun refresh() {
+        repositories = null
+        waitForResponse()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         vList.listener = this
-
-        vm.getAllRepos().observe(this, Observer<List<Repository>> {
-            vList.adapter = RepositoryListViewAdapter(it, this)
-        })
     }
 
     override fun onItemClick(position: Int) {

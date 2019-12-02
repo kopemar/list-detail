@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import cz.kopemar.listdetail.model.CommitWrapper
 import cz.kopemar.listdetail.viewmodel.RepositoryViewModel
+import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder.Companion.commits
 import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder.Companion.repo
 import cz.kopemar.listdetail.views.adapters.CommitListViewAdapter
 import kotlinx.android.synthetic.main.fragment_list.*
@@ -13,8 +14,6 @@ class CommitsFragment: BaseListFragment() {
 
     private val vm by viewModel<RepositoryViewModel>()
 
-    override fun getFragmentName() = "Commits"
-
     private var repositoryName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,14 +21,20 @@ class CommitsFragment: BaseListFragment() {
         repositoryName = repo
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun getFragmentName() = "Commits"
 
+    override fun waitForResponse() {
+        vSwipeRefresh.isRefreshing = true
         if (repo != null) {
             vm.getAllCommitsInRepo(repo!!).observe(this, Observer<List<CommitWrapper>> {
                 vList.adapter = CommitListViewAdapter(it, null)
+                if (vSwipeRefresh.isRefreshing) vSwipeRefresh.isRefreshing = false
             })
         }
+    }
 
+    override fun refresh() {
+        commits = null
+        waitForResponse()
     }
 }
