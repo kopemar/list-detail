@@ -35,7 +35,9 @@ class RepositoryViewModel : BaseViewModel() {
                 call: Call<List<Branch>>,
                 response: Response<List<Branch>>
             ) {
-                if (response.isSuccessful) branches!!.postValue(response.body())
+                if (branches != null) {
+                    if (response.isSuccessful) branches!!.postValue(response.body())
+                }
             }
 
             override fun onFailure(call: Call<List<Branch>>, t: Throwable) {
@@ -56,7 +58,9 @@ class RepositoryViewModel : BaseViewModel() {
                 call: Call<List<CommitWrapper>>,
                 response: Response<List<CommitWrapper>>
             ) {
-                if (response.isSuccessful) commits!!.postValue(response.body())
+                if (commits != null) {
+                    if (response.isSuccessful) commits!!.postValue(response.body())
+                }
             }
 
             override fun onFailure(call: Call<List<CommitWrapper>>, t: Throwable) {
