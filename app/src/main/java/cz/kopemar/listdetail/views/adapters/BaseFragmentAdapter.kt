@@ -4,7 +4,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import cz.kopemar.listdetail.fragments.BaseListFragment
 
-class BaseFragmentAdapter(private val fragments: List<BaseListFragment>, manager: FragmentManager) :
+class BaseFragmentAdapter(private val fragments: List<BaseListFragment>, var manager: FragmentManager) :
     FragmentPagerAdapter(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int) = fragments[position]

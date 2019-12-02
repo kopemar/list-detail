@@ -1,15 +1,12 @@
 package cz.kopemar.listdetail
 
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.databinding.DataBindingUtil
+import cz.kopemar.listdetail.databinding.ActivityRepositoryBinding
 import cz.kopemar.listdetail.fragments.BranchesFragment
 import cz.kopemar.listdetail.fragments.CommitsFragment
 import cz.kopemar.listdetail.fragments.RepositoriesFragment
-import cz.kopemar.listdetail.viewmodel.MainViewModel
 import cz.kopemar.listdetail.viewmodel.RepositoryViewModel
 import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder.Companion.branches
 import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder.Companion.commits
@@ -18,9 +15,10 @@ import cz.kopemar.listdetail.views.adapters.BaseFragmentAdapter
 import kotlinx.android.synthetic.main.activity_repository.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class RepositoryDetailActivity: AppCompatActivity() {
+class RepositoryActivity : AppCompatActivity() {
 
     private val vm by viewModel<RepositoryViewModel>()
+    private var binding: ActivityRepositoryBinding? = null
 
     private val fragments = listOf(
         CommitsFragment(),
@@ -29,15 +27,8 @@ class RepositoryDetailActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_repository)
 
-        repo = intent.getStringExtra(RepositoriesFragment.intent_text)
-        setSupportActionBar(findViewById(R.id.vToolbar))
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        vViewPager.adapter = BaseFragmentAdapter(fragments, supportFragmentManager)
-        vTabs.setupWithViewPager(vViewPager)
+        setUi()
     }
 
     override fun onBackPressed() {
@@ -53,6 +44,19 @@ class RepositoryDetailActivity: AppCompatActivity() {
         commits = null
         branches = null
         finish()
+
         return true
     }
+
+    private fun setUi() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_repository)
+        binding?.vm = vm
+
+        vm.name = intent.getStringExtra(RepositoriesFragment.intent_text)
+        setSupportActionBar(findViewById(R.id.vToolbar))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        vViewPager.adapter = BaseFragmentAdapter(fragments, supportFragmentManager)
+        vTabs.setupWithViewPager(vViewPager)
+    }
+
 }

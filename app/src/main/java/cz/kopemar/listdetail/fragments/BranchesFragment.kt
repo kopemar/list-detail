@@ -2,6 +2,7 @@ package cz.kopemar.listdetail.fragments
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import cz.kopemar.listdetail.R
 import cz.kopemar.listdetail.model.Branch
 import cz.kopemar.listdetail.viewmodel.RepositoryViewModel
 import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder.Companion.branches
@@ -13,7 +14,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class BranchesFragment: BaseListFragment() {
     private val vm by viewModel<RepositoryViewModel>()
 
-    override fun getFragmentName() = "Branches"
+    override fun getFragmentName() = activity?.resources?.getString(R.string.branches)
 
     private var repositoryName: String? = null
 

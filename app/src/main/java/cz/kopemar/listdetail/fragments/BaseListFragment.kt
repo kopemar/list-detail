@@ -19,15 +19,13 @@ abstract class BaseListFragment: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         waitForResponse()
-
         vSwipeRefresh.setOnRefreshListener {
             refresh()
         }
     }
 
-    open fun getFragmentName() = "Base Fragment"
+    open fun getFragmentName() = context?.resources?.getString(R.string.base_fragment)
 
     abstract fun waitForResponse()
 

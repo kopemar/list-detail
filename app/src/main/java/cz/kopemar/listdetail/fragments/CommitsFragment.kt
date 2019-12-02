@@ -2,6 +2,7 @@ package cz.kopemar.listdetail.fragments
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import cz.kopemar.listdetail.R
 import cz.kopemar.listdetail.model.CommitWrapper
 import cz.kopemar.listdetail.viewmodel.RepositoryViewModel
 import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder.Companion.commits
@@ -21,7 +22,7 @@ class CommitsFragment: BaseListFragment() {
         repositoryName = repo
     }
 
-    override fun getFragmentName() = "Commits"
+    override fun getFragmentName() = context?.resources?.getString(R.string.commits)
 
     override fun waitForResponse() {
         vSwipeRefresh.isRefreshing = true

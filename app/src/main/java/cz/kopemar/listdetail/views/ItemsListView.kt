@@ -32,6 +32,7 @@ class ItemsListView @JvmOverloads constructor(
         vListView.apply {
             adapter = this@ItemsListView.adapter
             layoutManager = LinearLayoutManager(context)
+            layoutManager?.isMeasurementCacheEnabled = false
         }
     }
 

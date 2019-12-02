@@ -15,6 +15,7 @@
         tools:text="@string/commit_message" />
 
     <TextView
+
         android:id="@+id/vCommitDate"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
