@@ -19,6 +19,9 @@ class RepositoriesFragment : BaseListFragment(), OnListItemClickedListener {
 
     private val vm by viewModel<MainViewModel>()
 
+    override var fragmentName = R.string.repositories
+
+
     override fun waitForResponse() {
         vSwipeRefresh.isRefreshing = true
         vm.getAllRepos().observe(this, Observer<List<Repository>> {

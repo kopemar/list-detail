@@ -8,9 +8,7 @@ import androidx.fragment.app.Fragment
 import cz.kopemar.listdetail.R
 import kotlinx.android.synthetic.main.fragment_list.*
 
-abstract class BaseListFragment: Fragment() {
-
-    open var fragmentName: Int = R.string.base_fragment
+abstract class BaseListFragment: NamedFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
