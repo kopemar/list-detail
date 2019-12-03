@@ -1,5 +1,6 @@
 package cz.kopemar.listdetail.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import cz.kopemar.listdetail.model.Repository
@@ -29,15 +30,18 @@ class MainViewModel : BaseViewModel() {
             ) {
                 if (repositories != null) {
                     if (response.isSuccessful) repositories!!.postValue(response.body())
+                    else Log.i(tag, "Got ${response.code()} when fetching all repos")
                 }
             }
-
             override fun onFailure(call: Call<List<Repository>>, t: Throwable) {
                 t.localizedMessage
             }
         })
-
         return repositories!!
+    }
+
+    companion object {
+        const val tag = "MainViewModel"
     }
 
 }

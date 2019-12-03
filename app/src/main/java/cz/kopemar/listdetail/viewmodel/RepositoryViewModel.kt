@@ -1,5 +1,6 @@
 package cz.kopemar.listdetail.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MediatorLiveData
 import cz.kopemar.listdetail.model.Branch
 import cz.kopemar.listdetail.model.CommitWrapper
@@ -44,9 +45,9 @@ class RepositoryViewModel : BaseViewModel() {
             ) {
                 if (branches != null) {
                     if (response.isSuccessful) branches!!.postValue(response.body())
+                    else Log.i(MainViewModel.tag, "Got ${response.code()} when fetching all branches")
                 }
             }
-
             override fun onFailure(call: Call<List<Branch>>, t: Throwable) {
                 t.localizedMessage
             }
@@ -67,6 +68,7 @@ class RepositoryViewModel : BaseViewModel() {
             ) {
                 if (commits != null) {
                     if (response.isSuccessful) commits!!.postValue(response.body())
+                    else Log.i(MainViewModel.tag, "Got ${response.code()} when fetching all commits")
                 }
             }
 

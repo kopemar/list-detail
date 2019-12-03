@@ -55,7 +55,7 @@ class RepositoryActivity : AppCompatActivity() {
         vm.name = intent.getStringExtra(RepositoriesFragment.intent_text)
         setSupportActionBar(findViewById(R.id.vToolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        vViewPager.adapter = BaseFragmentAdapter(fragments, supportFragmentManager)
+        vViewPager.adapter = BaseFragmentAdapter(fragments, this, supportFragmentManager)
         vTabs.setupWithViewPager(vViewPager)
     }
 

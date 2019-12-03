@@ -9,6 +9,9 @@ import cz.kopemar.listdetail.R
 import kotlinx.android.synthetic.main.fragment_list.*
 
 abstract class BaseListFragment: Fragment() {
+
+    open var fragmentName: Int = R.string.base_fragment
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -24,8 +27,6 @@ abstract class BaseListFragment: Fragment() {
             refresh()
         }
     }
-
-    open fun getFragmentName() = context?.resources?.getString(R.string.base_fragment)
 
     abstract fun waitForResponse()
 

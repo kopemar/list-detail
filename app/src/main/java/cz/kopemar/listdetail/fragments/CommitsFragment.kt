@@ -11,18 +11,11 @@ import cz.kopemar.listdetail.views.adapters.CommitListViewAdapter
 import kotlinx.android.synthetic.main.fragment_list.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class CommitsFragment: BaseListFragment() {
+class CommitsFragment : BaseListFragment() {
 
     private val vm by viewModel<RepositoryViewModel>()
 
-    private var repositoryName: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        repositoryName = repo
-    }
-
-    override fun getFragmentName() = context?.resources?.getString(R.string.commits)
+    override var fragmentName = R.string.commits
 
     override fun waitForResponse() {
         vSwipeRefresh.isRefreshing = true

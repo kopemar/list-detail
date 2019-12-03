@@ -25,9 +25,7 @@ abstract class BaseViewModel: ViewModel() {
     }
 
     private fun provideOkHttpClient(): OkHttpClient {
-        val client = OkHttpClient().newBuilder()
-
-        client.addInterceptor {
+        val client = OkHttpClient().newBuilder().addInterceptor {
             return@addInterceptor it.proceed(it.request())
         }
 

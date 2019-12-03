@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import cz.kopemar.listdetail.R
 import cz.kopemar.listdetail.views.adapters.AbstractViewAdapter
 import cz.kopemar.listdetail.views.listener.OnListItemClickedListener
@@ -17,10 +17,10 @@ class ItemsListView @JvmOverloads constructor(
     var listener: OnListItemClickedListener? = null
 
     var adapter: AbstractViewAdapter<*>? = null
-    set(value) {
-        field = value
-        vListView.adapter = value
-    }
+        set(value) {
+            field = value
+            vListView.adapter = value
+        }
 
     init {
         View.inflate(context, R.layout.view_list, this)
@@ -31,8 +31,8 @@ class ItemsListView @JvmOverloads constructor(
 
         vListView.apply {
             adapter = this@ItemsListView.adapter
-            layoutManager = LinearLayoutManager(context)
-            layoutManager?.isMeasurementCacheEnabled = false
+            // would use LinearLayoutManager but it doesn't work as expected (empty space between individual items in commit list)
+            layoutManager = GridLayoutManager(context, 1)
         }
     }
 

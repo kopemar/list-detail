@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import cz.kopemar.listdetail.R
 import cz.kopemar.listdetail.RepositoryActivity
 import cz.kopemar.listdetail.model.Repository
 import cz.kopemar.listdetail.viewmodel.MainViewModel
@@ -14,7 +15,7 @@ import cz.kopemar.listdetail.views.listener.OnListItemClickedListener
 import kotlinx.android.synthetic.main.fragment_list.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class RepositoriesFragment: BaseListFragment(), OnListItemClickedListener {
+class RepositoriesFragment : BaseListFragment(), OnListItemClickedListener {
 
     private val vm by viewModel<MainViewModel>()
 
