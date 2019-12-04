@@ -1,6 +1,5 @@
 package cz.kopemar.listdetail.fragments
 
-import android.util.Log
 import androidx.lifecycle.Observer
 import cz.kopemar.listdetail.R
 import cz.kopemar.listdetail.model.CommitWrapper

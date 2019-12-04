@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import cz.kopemar.listdetail.R
-import cz.kopemar.listdetail.RepositoryActivity
+import cz.kopemar.listdetail.activities.RepositoryActivity
 import cz.kopemar.listdetail.model.Repository
 import cz.kopemar.listdetail.viewmodel.MainViewModel
 import cz.kopemar.listdetail.views.adapters.RepositoryListViewAdapter

@@ -1,7 +1,8 @@
-package cz.kopemar.listdetail
+package cz.kopemar.listdetail.activities
 
 import android.os.Bundle
 import android.widget.Toast
+import cz.kopemar.listdetail.R
 import cz.kopemar.listdetail.fragments.AboutFragment
 import cz.kopemar.listdetail.fragments.RepositoriesFragment
 import cz.kopemar.listdetail.views.adapters.BaseFragmentAdapter

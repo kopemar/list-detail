@@ -1,10 +1,11 @@
-package cz.kopemar.listdetail
+package cz.kopemar.listdetail.activities
 
 import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import cz.kopemar.listdetail.R
 
 abstract class BaseActivity : AppCompatActivity() {
 

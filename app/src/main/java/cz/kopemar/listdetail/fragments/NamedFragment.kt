@@ -1,7 +1,7 @@
 package cz.kopemar.listdetail.fragments
 
 import androidx.fragment.app.Fragment
-import cz.kopemar.listdetail.BaseActivity
+import cz.kopemar.listdetail.activities.BaseActivity
 import cz.kopemar.listdetail.R
 
 abstract class NamedFragment : Fragment() {
