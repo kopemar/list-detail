@@ -1,6 +1,7 @@
 package cz.kopemar.listdetail
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import cz.kopemar.listdetail.databinding.ActivityRepositoryBinding
@@ -9,10 +10,11 @@ import cz.kopemar.listdetail.fragments.CommitsFragment
 import cz.kopemar.listdetail.fragments.RepositoriesFragment
 import cz.kopemar.listdetail.viewmodel.RepositoryDetailViewModel
 import cz.kopemar.listdetail.views.adapters.BaseFragmentAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_repository.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RepositoryActivity : AppCompatActivity() {
+class RepositoryActivity : BaseActivity() {
 
     private val vm by viewModel<RepositoryDetailViewModel>()
     private var binding: ActivityRepositoryBinding? = null
@@ -50,8 +52,13 @@ class RepositoryActivity : AppCompatActivity() {
         }
         setSupportActionBar(findViewById(R.id.vToolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        vViewPager.adapter = BaseFragmentAdapter(fragments, this, supportFragmentManager)
-        vTabs.setupWithViewPager(vViewPager)
+        if (checkConnection()) {
+            vViewPager.adapter = BaseFragmentAdapter(fragments, this, supportFragmentManager)
+            vTabs.setupWithViewPager(vViewPager)
+        } else {
+            Toast.makeText(this, resources.getText(R.string.no_connection), Toast.LENGTH_SHORT).show()
+        }
+
     }
 
 }

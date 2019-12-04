@@ -19,8 +19,4 @@ class MainViewModel(githubRepo: GithubRepository) : BaseViewModel(githubRepo) {
         }
     }
 
-    companion object {
-        const val tag = "MainViewModel"
-    }
-
 }

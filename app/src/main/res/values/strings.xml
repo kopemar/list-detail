@@ -12,4 +12,5 @@
     <string name="my_mail" translatable="false">xykopecka@gmail.com</string>
     <string name="about">About</string>
     <string name="repositories">Repositories</string>
+    <string name="no_connection">No Connection</string>
 </resources>
