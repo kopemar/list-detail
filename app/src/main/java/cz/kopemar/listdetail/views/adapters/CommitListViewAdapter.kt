@@ -6,7 +6,10 @@ import cz.kopemar.listdetail.views.items.CommitItemView
 import cz.kopemar.listdetail.views.listener.OnListItemClickedListener
 import cz.kopemar.listdetail.views.viewholder.CommitListViewHolder
 
-class CommitListViewAdapter(private val commits: List<CommitWrapper>, var listener: OnListItemClickedListener?) :
+class CommitListViewAdapter(
+    private val commits: List<CommitWrapper>,
+    var listener: OnListItemClickedListener?
+) :
     AbstractViewAdapter<CommitListViewHolder>(commits) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommitListViewHolder {

@@ -6,7 +6,10 @@ import cz.kopemar.listdetail.views.items.RepositoryItemView
 import cz.kopemar.listdetail.views.listener.OnListItemClickedListener
 import cz.kopemar.listdetail.views.viewholder.RepoListViewHolder
 
-class RepositoryListViewAdapter(private val repositories: List<Repository>, var listener: OnListItemClickedListener?) :
+class RepositoryListViewAdapter(
+    private val repositories: List<Repository>,
+    var listener: OnListItemClickedListener?
+) :
     AbstractViewAdapter<RepoListViewHolder>(repositories) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoListViewHolder {

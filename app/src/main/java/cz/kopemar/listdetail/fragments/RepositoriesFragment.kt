@@ -12,7 +12,7 @@ import cz.kopemar.listdetail.viewmodel.MainViewModel
 import cz.kopemar.listdetail.views.adapters.RepositoryListViewAdapter
 import cz.kopemar.listdetail.views.listener.OnListItemClickedListener
 import kotlinx.android.synthetic.main.fragment_list.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RepositoriesFragment : BaseListFragment(), OnListItemClickedListener {
 
@@ -20,16 +20,18 @@ class RepositoriesFragment : BaseListFragment(), OnListItemClickedListener {
 
     override var fragmentName = R.string.repositories
 
+    private val observer = Observer<List<Repository>> {
+        vList.adapter = RepositoryListViewAdapter(it, this)
+        if (vSwipeRefresh.isRefreshing) vSwipeRefresh.isRefreshing = false
+    }
+
     override fun waitForResponse() {
         vSwipeRefresh.isRefreshing = true
-        vm.getAllRepos().observe(this, Observer<List<Repository>> {
-            vList.adapter = RepositoryListViewAdapter(it, this)
-            if (vSwipeRefresh.isRefreshing) vSwipeRefresh.isRefreshing = false
-        })
+        vm.repositories.observe(viewLifecycleOwner, observer)
     }
 
     override fun refresh() {
-        vm.repositories = null
+        vm.refreshRepositories()
         waitForResponse()
     }
 
@@ -40,15 +42,15 @@ class RepositoriesFragment : BaseListFragment(), OnListItemClickedListener {
     }
 
     override fun onItemClick(position: Int) {
-        if (context != null) {
-            startIntent(context!!, position)
+        context?.let{
+            startIntent(it, position)
         }
     }
 
     private fun startIntent(context: Context, position: Int) {
         val intent = Intent(context, RepositoryActivity::class.java)
 
-        intent.putExtra(INTENT_TEXT, vm.repositories?.value?.get(position)?.name)
+        intent.putExtra(INTENT_TEXT, vm.repositories.value?.get(position)?.name)
         ContextCompat.startActivity(context, intent, null)
     }
 

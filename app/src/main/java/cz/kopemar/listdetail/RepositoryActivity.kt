@@ -10,7 +10,7 @@ import cz.kopemar.listdetail.fragments.RepositoriesFragment
 import cz.kopemar.listdetail.viewmodel.RepositoryDetailViewModel
 import cz.kopemar.listdetail.views.adapters.BaseFragmentAdapter
 import kotlinx.android.synthetic.main.activity_repository.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RepositoryActivity : AppCompatActivity() {
 
@@ -37,10 +37,7 @@ class RepositoryActivity : AppCompatActivity() {
     }
 
     private fun finishActivity(): Boolean {
-        vm.commits = null
-        vm. branches = null
         finish()
-
         return true
     }
 

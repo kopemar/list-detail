@@ -7,14 +7,19 @@ import cz.kopemar.listdetail.rest.GitHubService
 import cz.kopemar.listdetail.viewmodel.MainViewModel
 import cz.kopemar.listdetail.viewmodel.RepositoryDetailViewModel
 import okhttp3.OkHttpClient
-import org.koin.android.viewmodel.ext.koin.viewModel
-import org.koin.dsl.module.*
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.module.Module
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+val githubModule = module {
+    factory { GithubRepository(get()) }
+}
+
 val applicationModule: Module = module {
     viewModel { MainViewModel(get()) }
-    viewModel { RepositoryDetailViewModel() }
+    viewModel { RepositoryDetailViewModel(get()) }
 }
 
 val networkModule: Module = module {
@@ -23,9 +28,6 @@ val networkModule: Module = module {
     single { provideRetrofit(get()) }
 }
 
-val githubModule = module {
-    factory { GithubRepository(get()) }
-}
 
 private fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
     val baseUrl = "https://api.github.com/"

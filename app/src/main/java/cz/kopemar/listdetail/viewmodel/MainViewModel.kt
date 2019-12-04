@@ -1,45 +1,22 @@
 package cz.kopemar.listdetail.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.liveData
 import cz.kopemar.listdetail.model.Repository
 import cz.kopemar.listdetail.repository.GithubRepository
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class MainViewModel(private val githubRepo: GithubRepository) : BaseViewModel() {
+class MainViewModel(githubRepo: GithubRepository) : BaseViewModel(githubRepo) {
 
-    var repositories: MediatorLiveData<List<Repository>>? = null
+    var repositories: LiveData<List<Repository>> = fetchRepositories()
 
-    fun getAllRepos(): LiveData<List<Repository>> {
-        if (repositories == null) {
-            return fetchAllRepos()
-        }
-        return repositories!!
+    fun refreshRepositories() {
+        repositories = fetchRepositories()
     }
 
-    private fun fetchAllRepos(): MediatorLiveData<List<Repository>> {
-        val call = apiService.getAllRepos()
-
-        repositories = MediatorLiveData()
-
-        call.enqueue(object : Callback<List<Repository>> {
-            override fun onResponse(
-                call: Call<List<Repository>>,
-                response: Response<List<Repository>>
-            ) {
-                if (repositories != null) {
-                    if (response.isSuccessful) repositories!!.postValue(response.body())
-                    else Log.i(tag, "Got ${response.code()} when fetching all repos")
-                }
-            }
-            override fun onFailure(call: Call<List<Repository>>, t: Throwable) {
-                t.localizedMessage
-            }
-        })
-        return repositories!!
+    private fun fetchRepositories(): LiveData<List<Repository>> {
+        return liveData {
+            emit(githubRepo.getAllRepos())
+        }
     }
 
     companion object {

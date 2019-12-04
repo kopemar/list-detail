@@ -1,90 +1,40 @@
 package cz.kopemar.listdetail.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
 import cz.kopemar.listdetail.model.Branch
 import cz.kopemar.listdetail.model.CommitWrapper
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import cz.kopemar.listdetail.repository.GithubRepository
 
-class RepositoryDetailViewModel : BaseViewModel() {
+class RepositoryDetailViewModel(githubRepo: GithubRepository) : BaseViewModel(githubRepo) {
 
-    var repositoryName: String = ""
-    set (value) {
-        field = value
-        Log.e("RepoVM", "setting repo name to $value")
+    var repositoryName: String = "repository"
+
+    var commits: LiveData<List<CommitWrapper>> = fetchCommits()
+
+    var branches: LiveData<List<Branch>> = fetchBranches()
+
+    fun refreshCommits() {
+        commits = fetchCommits()
     }
-    get() {
-        Log.e("RepoVM", "getting repo name $field")
-        return field
-    }
-    var commits: MediatorLiveData<List<CommitWrapper>>? = null
-    var branches: MediatorLiveData<List<Branch>>? = null
 
-    fun getAllBranchesInRepo(repo: String): MediatorLiveData<List<Branch>> {
-        if (branches == null) {
-            return fetchAllBranches(repo)
+    fun refreshBranches() {
+        branches = fetchBranches()
+    }
+
+    private fun fetchBranches(): LiveData<List<Branch>> {
+        return liveData {
+            emit(githubRepo.getAllBranchesInRepo(repositoryName))
         }
-        return branches!!
     }
 
-    fun getAllCommitsInRepo(): MediatorLiveData<List<CommitWrapper>> {
-        if (commits == null) {
-            return fetchAllCommits(repositoryName)
+    private fun fetchCommits(): LiveData<List<CommitWrapper>> {
+        return liveData {
+            emit(githubRepo.getCommitsInRepo(repositoryName, LIMIT))
         }
-        return commits!!
-    }
-
-    private fun fetchAllBranches(repo: String): MediatorLiveData<List<Branch>> {
-        val call = apiService.getBranchesInRepo(repo)
-
-        branches = MediatorLiveData()
-
-        Log.i("repodetail", "calling branches")
-        call.enqueue(object : Callback<List<Branch>> {
-            override fun onResponse(
-                call: Call<List<Branch>>,
-                response: Response<List<Branch>>
-            ) {
-                if (branches != null) {
-                    if (response.isSuccessful) branches!!.postValue(response.body())
-                    else Log.i(MainViewModel.tag, "Got ${response.code()} when fetching all branches")
-                }
-            }
-            override fun onFailure(call: Call<List<Branch>>, t: Throwable) {
-                t.localizedMessage
-            }
-        })
-
-        return branches!!
-    }
-
-    private fun fetchAllCommits(repo: String): MediatorLiveData<List<CommitWrapper>> {
-        val call = apiService.getCommitsInRepo(repo, limit)
-
-        commits = MediatorLiveData()
-
-        call.enqueue(object : Callback<List<CommitWrapper>> {
-            override fun onResponse(
-                call: Call<List<CommitWrapper>>,
-                response: Response<List<CommitWrapper>>
-            ) {
-                if (commits != null) {
-                    if (response.isSuccessful) commits!!.postValue(response.body())
-                    else Log.i(MainViewModel.tag, "Got ${response.code()} when fetching all commits")
-                }
-            }
-
-            override fun onFailure(call: Call<List<CommitWrapper>>, t: Throwable) {
-                t.localizedMessage
-            }
-        })
-
-        return commits!!
     }
 
     companion object {
-        const val limit = 10
+        const val LIMIT = 10
     }
 }
