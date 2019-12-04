@@ -4,11 +4,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import cz.kopemar.listdetail.model.Repository
+import cz.kopemar.listdetail.repository.GithubRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel : BaseViewModel() {
+class MainViewModel(private val githubRepo: GithubRepository) : BaseViewModel() {
 
     var repositories: MediatorLiveData<List<Repository>>? = null
 

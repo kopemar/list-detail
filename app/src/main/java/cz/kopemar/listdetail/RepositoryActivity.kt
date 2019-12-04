@@ -37,7 +37,6 @@ class RepositoryActivity : AppCompatActivity() {
     }
 
     private fun finishActivity(): Boolean {
-        vm.repositoryName = null
         vm.commits = null
         vm. branches = null
         finish()
@@ -49,7 +48,9 @@ class RepositoryActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_repository)
         binding?.vm = vm
 
-        vm.name = intent.getStringExtra(RepositoriesFragment.INTENT_TEXT)
+        intent.getStringExtra(RepositoriesFragment.INTENT_TEXT)?.let {
+            vm.repositoryName = it
+        }
         setSupportActionBar(findViewById(R.id.vToolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         vViewPager.adapter = BaseFragmentAdapter(fragments, this, supportFragmentManager)

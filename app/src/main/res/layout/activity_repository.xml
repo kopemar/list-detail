@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:title="@{vm.name}"/>
+                app:title="@{vm.repositoryName}"/>
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/vTabs"

@@ -10,15 +10,17 @@ import retrofit2.Response
 
 class RepositoryDetailViewModel : BaseViewModel() {
 
-    var repositoryName: String? = null
-    var commits: MediatorLiveData<List<CommitWrapper>>? = null
-    var branches: MediatorLiveData<List<Branch>>? = null
-
-    var name: String? = null
+    var repositoryName: String = ""
     set (value) {
         field = value
-        repositoryName = value
+        Log.e("RepoVM", "setting repo name to $value")
     }
+    get() {
+        Log.e("RepoVM", "getting repo name $field")
+        return field
+    }
+    var commits: MediatorLiveData<List<CommitWrapper>>? = null
+    var branches: MediatorLiveData<List<Branch>>? = null
 
     fun getAllBranchesInRepo(repo: String): MediatorLiveData<List<Branch>> {
         if (branches == null) {
@@ -27,9 +29,9 @@ class RepositoryDetailViewModel : BaseViewModel() {
         return branches!!
     }
 
-    fun getAllCommitsInRepo(repo: String): MediatorLiveData<List<CommitWrapper>> {
+    fun getAllCommitsInRepo(): MediatorLiveData<List<CommitWrapper>> {
         if (commits == null) {
-            return fetchAllCommits(repo)
+            return fetchAllCommits(repositoryName)
         }
         return commits!!
     }
@@ -39,6 +41,7 @@ class RepositoryDetailViewModel : BaseViewModel() {
 
         branches = MediatorLiveData()
 
+        Log.i("repodetail", "calling branches")
         call.enqueue(object : Callback<List<Branch>> {
             override fun onResponse(
                 call: Call<List<Branch>>,
