@@ -4,19 +4,20 @@ import android.util.Log
 import androidx.lifecycle.MediatorLiveData
 import cz.kopemar.listdetail.model.Branch
 import cz.kopemar.listdetail.model.CommitWrapper
-import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder.Companion.branches
-import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder.Companion.commits
-import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder.Companion.repo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RepositoryViewModel : BaseViewModel() {
+class RepositoryDetailViewModel : BaseViewModel() {
+
+    var repositoryName: String? = null
+    var commits: MediatorLiveData<List<CommitWrapper>>? = null
+    var branches: MediatorLiveData<List<Branch>>? = null
 
     var name: String? = null
     set (value) {
         field = value
-        repo = value
+        repositoryName = value
     }
 
     fun getAllBranchesInRepo(repo: String): MediatorLiveData<List<Branch>> {

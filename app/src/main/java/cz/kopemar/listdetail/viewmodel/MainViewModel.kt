@@ -4,12 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import cz.kopemar.listdetail.model.Repository
-import cz.kopemar.listdetail.viewmodel.holder.RepositoriesHolder.Companion.repositories
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class MainViewModel : BaseViewModel() {
+
+    var repositories: MediatorLiveData<List<Repository>>? = null
 
     fun getAllRepos(): LiveData<List<Repository>> {
         if (repositories == null) {

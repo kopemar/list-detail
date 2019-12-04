@@ -9,7 +9,6 @@ import cz.kopemar.listdetail.R
 import cz.kopemar.listdetail.RepositoryActivity
 import cz.kopemar.listdetail.model.Repository
 import cz.kopemar.listdetail.viewmodel.MainViewModel
-import cz.kopemar.listdetail.viewmodel.holder.RepositoriesHolder.Companion.repositories
 import cz.kopemar.listdetail.views.adapters.RepositoryListViewAdapter
 import cz.kopemar.listdetail.views.listener.OnListItemClickedListener
 import kotlinx.android.synthetic.main.fragment_list.*
@@ -21,7 +20,6 @@ class RepositoriesFragment : BaseListFragment(), OnListItemClickedListener {
 
     override var fragmentName = R.string.repositories
 
-
     override fun waitForResponse() {
         vSwipeRefresh.isRefreshing = true
         vm.getAllRepos().observe(this, Observer<List<Repository>> {
@@ -31,7 +29,7 @@ class RepositoriesFragment : BaseListFragment(), OnListItemClickedListener {
     }
 
     override fun refresh() {
-        repositories = null
+        vm.repositories = null
         waitForResponse()
     }
 
@@ -50,11 +48,11 @@ class RepositoriesFragment : BaseListFragment(), OnListItemClickedListener {
     private fun startIntent(context: Context, position: Int) {
         val intent = Intent(context, RepositoryActivity::class.java)
 
-        intent.putExtra(intent_text, repositories?.value?.get(position)?.name)
+        intent.putExtra(INTENT_TEXT, vm.repositories?.value?.get(position)?.name)
         ContextCompat.startActivity(context, intent, null)
     }
 
     companion object {
-        const val intent_text = "OPEN_REPO"
+        const val INTENT_TEXT = "OPEN_REPO"
     }
 }

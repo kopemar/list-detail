@@ -3,7 +3,7 @@
     <data>
         <variable
             name="vm"
-            type="cz.kopemar.listdetail.viewmodel.RepositoryViewModel" />
+            type="cz.kopemar.listdetail.viewmodel.RepositoryDetailViewModel" />
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"

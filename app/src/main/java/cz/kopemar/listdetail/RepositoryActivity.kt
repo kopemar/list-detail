@@ -7,17 +7,14 @@ import cz.kopemar.listdetail.databinding.ActivityRepositoryBinding
 import cz.kopemar.listdetail.fragments.BranchesFragment
 import cz.kopemar.listdetail.fragments.CommitsFragment
 import cz.kopemar.listdetail.fragments.RepositoriesFragment
-import cz.kopemar.listdetail.viewmodel.RepositoryViewModel
-import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder.Companion.branches
-import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder.Companion.commits
-import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder.Companion.repo
+import cz.kopemar.listdetail.viewmodel.RepositoryDetailViewModel
 import cz.kopemar.listdetail.views.adapters.BaseFragmentAdapter
 import kotlinx.android.synthetic.main.activity_repository.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class RepositoryActivity : AppCompatActivity() {
 
-    private val vm by viewModel<RepositoryViewModel>()
+    private val vm by viewModel<RepositoryDetailViewModel>()
     private var binding: ActivityRepositoryBinding? = null
 
     private val fragments = listOf(
@@ -40,9 +37,9 @@ class RepositoryActivity : AppCompatActivity() {
     }
 
     private fun finishActivity(): Boolean {
-        repo = null
-        commits = null
-        branches = null
+        vm.repositoryName = null
+        vm.commits = null
+        vm. branches = null
         finish()
 
         return true
@@ -52,7 +49,7 @@ class RepositoryActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_repository)
         binding?.vm = vm
 
-        vm.name = intent.getStringExtra(RepositoriesFragment.intent_text)
+        vm.name = intent.getStringExtra(RepositoriesFragment.INTENT_TEXT)
         setSupportActionBar(findViewById(R.id.vToolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         vViewPager.adapter = BaseFragmentAdapter(fragments, this, supportFragmentManager)

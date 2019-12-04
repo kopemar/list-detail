@@ -1,26 +1,23 @@
 package cz.kopemar.listdetail.fragments
 
-import android.os.Bundle
 import androidx.lifecycle.Observer
 import cz.kopemar.listdetail.R
 import cz.kopemar.listdetail.model.CommitWrapper
-import cz.kopemar.listdetail.viewmodel.RepositoryViewModel
-import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder.Companion.commits
-import cz.kopemar.listdetail.viewmodel.holder.CommitsHolder.Companion.repo
+import cz.kopemar.listdetail.viewmodel.RepositoryDetailViewModel
 import cz.kopemar.listdetail.views.adapters.CommitListViewAdapter
 import kotlinx.android.synthetic.main.fragment_list.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class CommitsFragment : BaseListFragment() {
 
-    private val vm by viewModel<RepositoryViewModel>()
+    private val vm by viewModel<RepositoryDetailViewModel>()
 
     override var fragmentName = R.string.commits
 
     override fun waitForResponse() {
         vSwipeRefresh.isRefreshing = true
-        if (repo != null) {
-            vm.getAllCommitsInRepo(repo!!).observe(this, Observer<List<CommitWrapper>> {
+        if (vm.repositoryName != null) {
+            vm.getAllCommitsInRepo(vm.repositoryName!!).observe(this, Observer<List<CommitWrapper>> {
                 vList.adapter = CommitListViewAdapter(it, null)
                 if (vSwipeRefresh.isRefreshing) vSwipeRefresh.isRefreshing = false
             })
@@ -28,7 +25,7 @@ class CommitsFragment : BaseListFragment() {
     }
 
     override fun refresh() {
-        commits = null
+        vm.commits = null
         waitForResponse()
     }
 }
