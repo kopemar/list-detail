@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import cz.kopemar.listdetail.R
 import kotlinx.android.synthetic.main.fragment_list.*
 
-abstract class BaseListFragment: NamedFragment() {
+abstract class BaseListFragment : NamedFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -19,9 +19,11 @@ abstract class BaseListFragment: NamedFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        waitForResponse()
-        vSwipeRefresh.setOnRefreshListener {
-            refresh()
+        if (checkConnection()) {
+            waitForResponse()
+            vSwipeRefresh.setOnRefreshListener {
+                refresh()
+            }
         }
     }
 

@@ -21,12 +21,16 @@ class CommitsFragment : BaseListFragment() {
     override var fragmentName = R.string.commits
 
     override fun waitForResponse() {
-        vSwipeRefresh.isRefreshing = true
-        vm.commits.observe(viewLifecycleOwner, observer)
+        if (checkConnection()) {
+            vSwipeRefresh.isRefreshing = true
+            vm.commits.observe(viewLifecycleOwner, observer)
+        }
     }
 
     override fun refresh() {
-        vm.refreshCommits()
-        waitForResponse()
+        if (checkConnection()) {
+            vm.refreshCommits()
+            waitForResponse()
+        }
     }
 }

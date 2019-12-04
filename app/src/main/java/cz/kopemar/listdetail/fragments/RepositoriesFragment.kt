@@ -26,8 +26,10 @@ class RepositoriesFragment : BaseListFragment(), OnListItemClickedListener {
     }
 
     override fun waitForResponse() {
-        vSwipeRefresh.isRefreshing = true
-        vm.repositories.observe(viewLifecycleOwner, observer)
+        if (checkConnection()) {
+            vSwipeRefresh.isRefreshing = true
+            vm.repositories.observe(viewLifecycleOwner, observer)
+        }
     }
 
     override fun refresh() {
@@ -42,7 +44,7 @@ class RepositoriesFragment : BaseListFragment(), OnListItemClickedListener {
     }
 
     override fun onItemClick(position: Int) {
-        context?.let{
+        context?.let {
             startIntent(it, position)
         }
     }

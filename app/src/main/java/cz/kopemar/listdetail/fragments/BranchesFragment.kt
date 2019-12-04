@@ -20,12 +20,16 @@ class BranchesFragment : BaseListFragment() {
     override var fragmentName = R.string.branches
 
     override fun waitForResponse() {
-        vSwipeRefresh.isRefreshing = true
-        vm.branches.observe(viewLifecycleOwner, observer)
+        if (checkConnection()) {
+            vSwipeRefresh.isRefreshing = true
+            vm.branches.observe(viewLifecycleOwner, observer)
+        }
     }
 
     override fun refresh() {
-        vm.refreshBranches()
-        waitForResponse()
+        if (checkConnection()) {
+            vm.refreshBranches()
+            waitForResponse()
+        }
     }
 }

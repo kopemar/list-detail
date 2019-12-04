@@ -52,13 +52,9 @@ class RepositoryActivity : BaseActivity() {
         }
         setSupportActionBar(findViewById(R.id.vToolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        if (checkConnection()) {
+        if (checkConnection(this)) {
             vViewPager.adapter = BaseFragmentAdapter(fragments, this, supportFragmentManager)
             vTabs.setupWithViewPager(vViewPager)
-        } else {
-            Toast.makeText(this, resources.getText(R.string.no_connection), Toast.LENGTH_SHORT).show()
         }
-
     }
-
 }

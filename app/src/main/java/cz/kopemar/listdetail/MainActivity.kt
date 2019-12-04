@@ -24,7 +24,7 @@ class MainActivity : BaseActivity() {
     private fun setUi() {
         setContentView(R.layout.activity_main)
 
-        if (checkConnection()) {
+        if (checkConnection(this)) {
             vMainViewPager.adapter = BaseFragmentAdapter(fragments, this, supportFragmentManager)
             vMainTabs.setupWithViewPager(vMainViewPager)
         } else {
