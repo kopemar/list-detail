@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">List and Detail</string>
     <string name="repository_name">repository-name</string>
-    <string name="my_name">Martina Kopecká</string>
+    <string name="my_name" translatable="false">Martina Kopecká</string>
     <string name="commit_message">Added new super long commit message to test commit message displaying. \n\nHope it works! </string>
     <string name="repository_date">2016-09-02T20:55:15Z</string>
     <string name="base_fragment">Base Fragment</string>
@@ -9,7 +9,7 @@
     <string name="commits">Commits</string>
     <string name="application_details">Application author</string>
     <string name="profile_photo">Profile Photo</string>
-    <string name="my_mail">xykopecka@gmail.com</string>
+    <string name="my_mail" translatable="false">xykopecka@gmail.com</string>
     <string name="about">About</string>
     <string name="repositories">Repositories</string>
 </resources>
