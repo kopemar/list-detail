@@ -7,7 +7,6 @@ import cz.kopemar.listdetail.model.Repository
 import cz.kopemar.listdetail.rest.GitHubService
 import retrofit2.HttpException
 
-
 class GithubRepository(private val githubApi: GitHubService) {
 
     /**

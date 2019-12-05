@@ -10,8 +10,12 @@
     <string name="application_details">Application author</string>
     <string name="profile_photo">Profile Photo</string>
     <string name="my_mail" translatable="false">xykopecka@gmail.com</string>
+    <string name="my_github" translatable="false">https://github.com/kopemar</string>
     <string name="about">About</string>
     <string name="repositories">Repositories</string>
     <string name="no_connection">No Connection</string>
     <string name="http_exception">HttpException</string>
+    <string name="github">GitHub</string>
+    <string name="email">Email</string>
+    <string name="mailto">mailto</string>
 </resources>

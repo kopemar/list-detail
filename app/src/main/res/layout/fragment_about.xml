@@ -63,4 +63,23 @@
         app:layout_constraintStart_toEndOf="@id/vMailIcon"
         app:layout_constraintTop_toTopOf="@id/vMailIcon" />
 
+    <Button
+        android:id="@+id/vGithubButton"
+        style="@style/Layout.Wrapped"
+        android:layout_margin="@dimen/_24dp"
+        android:text="@string/github"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/vEmailButton"
+        app:layout_constraintTop_toBottomOf="@id/vAboutMail" />
+
+    <Button
+        android:id="@+id/vEmailButton"
+        style="@style/Layout.Wrapped"
+        android:layout_margin="@dimen/_24dp"
+        android:text="@string/email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/vGithubButton"
+        app:layout_constraintTop_toBottomOf="@id/vAboutMail" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
