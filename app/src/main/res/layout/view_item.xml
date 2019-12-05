@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_64dp">
+    android:layout_height="@dimen/_64dp"
+    android:background="?attr/selectableItemBackground">
 
     <TextView
         android:id="@+id/vRepositoryName"
         style="@style/Layout.Wrapped.H1.Thick.MarginS8"
         app:layout_constraintBottom_toTopOf="@id/vRepositoryUpdated"
-        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
         tools:text="@string/repository_name" />
 
     <TextView

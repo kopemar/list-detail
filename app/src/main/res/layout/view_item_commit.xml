@@ -9,16 +9,16 @@
         android:id="@+id/vCommitMessage"
         style="@style/Layout.Fit.H2.Margin8"
         app:layout_constraintBottom_toTopOf="@id/vCommitDate"
-        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
         tools:text="@string/commit_message" />
 
     <TextView
 
         android:id="@+id/vCommitDate"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8dp"
         android:layout_marginEnd="@dimen/_8dp"
         android:layout_marginBottom="@dimen/_8dp"
