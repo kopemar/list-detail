@@ -7,8 +7,13 @@ import cz.kopemar.listdetail.model.Repository
 import cz.kopemar.listdetail.rest.GitHubService
 import retrofit2.HttpException
 
+
 class GithubRepository(private val githubApi: GitHubService) {
 
+    /**
+     * @return list of all repositories.
+     * Try-catch block for catching HttpExceptions (eg. 403 code for more than 60 requests per hour).
+     */
     suspend fun getAllRepos(): List<Repository> {
         return try {
             githubApi.getAllRepos()
@@ -18,6 +23,10 @@ class GithubRepository(private val githubApi: GitHubService) {
         }
     }
 
+    /**
+     * @return list of all branches in individual repository.
+     * Try-catch block for catching HttpExceptions (eg. 403 code for more than 60 requests per hour).
+     */
     suspend fun getAllBranchesInRepo(repoName: String): List<Branch> {
         return try {
             githubApi.getBranchesInRepo(repoName)
@@ -27,6 +36,10 @@ class GithubRepository(private val githubApi: GitHubService) {
         }
     }
 
+    /**
+     * @return list of all commits in individual repository.
+     * Try-catch block for catching HttpExceptions (eg. 403 code for more than 60 requests per hour).
+     */
     suspend fun getCommitsInRepo(repoName: String, limit: Int): List<CommitWrapper> {
         return try {
             githubApi.getCommitsInRepo(repoName, limit)

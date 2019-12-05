@@ -13,6 +13,9 @@ import cz.kopemar.listdetail.R
 abstract class BaseActivity : AppCompatActivity() {
 
     companion object {
+        /**
+         * Checks if device is connected to internet (not being connected would cause errors).
+         */
         fun checkConnection(app: Activity): Boolean {
             val cm = app.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val net = cm.activeNetworkInfo
