@@ -8,6 +8,9 @@ import cz.kopemar.listdetail.views.adapters.CommitListViewAdapter
 import kotlinx.android.synthetic.main.fragment_list.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
+/**
+ * [BaseListFragment] for list of commits (observes changes of commits list and puts data into list with CommitListViewAdapter).
+ */
 class CommitsFragment : BaseListFragment() {
 
     private val observer = Observer<List<CommitWrapper>> {

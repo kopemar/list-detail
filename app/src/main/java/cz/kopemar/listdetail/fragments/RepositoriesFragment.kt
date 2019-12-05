@@ -14,6 +14,9 @@ import cz.kopemar.listdetail.views.listener.OnListItemClickedListener
 import kotlinx.android.synthetic.main.fragment_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * [BaseListFragment] for list of repositories (observes changes of repository list and puts data into list with RepositoryListViewAdapter).
+ */
 class RepositoriesFragment : BaseListFragment(), OnListItemClickedListener {
 
     private val vm by viewModel<MainViewModel>()

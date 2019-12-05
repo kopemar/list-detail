@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import cz.kopemar.listdetail.R
 import kotlinx.android.synthetic.main.fragment_list.*
 
+/**
+ * Abstract [NamedFragment] that puts data into ItemsListView.
+ */
 abstract class BaseListFragment : NamedFragment() {
 
     override fun onCreateView(

@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import cz.kopemar.listdetail.R
 
+/**
+ * Fragment with information about the app.
+ */
 class AboutFragment: NamedFragment() {
 
     override var fragmentName = R.string.about
