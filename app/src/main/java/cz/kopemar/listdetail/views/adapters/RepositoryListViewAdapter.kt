@@ -27,7 +27,7 @@ class RepositoryListViewAdapter(
     override fun onBindViewHolder(holder: RepoListViewHolder, position: Int) {
         holder.repoItemView.apply {
             setName(repositories[position].name)
-            setUpdated(repositories[position].updated)
+            setPushed(repositories[position].last_pushed)
         }
     }
 

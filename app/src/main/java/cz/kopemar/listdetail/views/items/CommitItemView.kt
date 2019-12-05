@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import cz.kopemar.listdetail.R
+import cz.kopemar.listdetail.utils.parseDate
 import kotlinx.android.synthetic.main.view_item_commit.view.*
 
 class CommitItemView @JvmOverloads constructor(
@@ -19,7 +20,7 @@ class CommitItemView @JvmOverloads constructor(
     }
 
     fun setCommitDate(date: String) {
-        vCommitDate.text = date
+        vCommitDate.text = date.parseDate()
     }
 
 }
