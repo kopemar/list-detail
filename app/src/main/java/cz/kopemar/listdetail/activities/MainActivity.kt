@@ -8,7 +8,9 @@ import cz.kopemar.listdetail.fragments.RepositoriesFragment
 import cz.kopemar.listdetail.views.adapters.BaseFragmentAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
-
+/**
+ * MainActivity (opens when app starts) and calls other fragments.
+ */
 class MainActivity : BaseActivity() {
 
     private val fragments = listOf(

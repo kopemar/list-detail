@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import cz.kopemar.listdetail.R
-import cz.kopemar.listdetail.activities.RepositoryActivity
+import cz.kopemar.listdetail.activities.RepositoryDetailActivity
 import cz.kopemar.listdetail.model.Repository
 import cz.kopemar.listdetail.viewmodel.MainViewModel
 import cz.kopemar.listdetail.views.adapters.RepositoryListViewAdapter
@@ -53,7 +53,7 @@ class RepositoriesFragment : BaseListFragment(), OnListItemClickedListener {
     }
 
     private fun startIntent(context: Context, position: Int) {
-        val intent = Intent(context, RepositoryActivity::class.java)
+        val intent = Intent(context, RepositoryDetailActivity::class.java)
 
         intent.putExtra(INTENT_TEXT, vm.repositories.value?.get(position)?.name)
         ContextCompat.startActivity(context, intent, null)

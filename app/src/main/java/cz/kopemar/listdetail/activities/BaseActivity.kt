@@ -7,6 +7,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import cz.kopemar.listdetail.R
 
+/**
+ * Abstract super activity.
+ */
 abstract class BaseActivity : AppCompatActivity() {
 
     companion object {

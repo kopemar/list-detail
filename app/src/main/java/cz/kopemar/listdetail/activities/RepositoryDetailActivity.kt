@@ -12,7 +12,10 @@ import cz.kopemar.listdetail.views.adapters.BaseFragmentAdapter
 import kotlinx.android.synthetic.main.activity_repository.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RepositoryActivity : BaseActivity() {
+/**
+ * Individual activity. Opens on repository click in [MainActivity].
+ */
+class RepositoryDetailActivity : BaseActivity() {
 
     private val vm by viewModel<RepositoryDetailViewModel>()
     private var binding: ActivityRepositoryBinding? = null
