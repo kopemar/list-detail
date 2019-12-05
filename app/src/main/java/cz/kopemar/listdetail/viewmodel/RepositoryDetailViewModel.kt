@@ -6,6 +6,9 @@ import cz.kopemar.listdetail.model.Branch
 import cz.kopemar.listdetail.model.CommitWrapper
 import cz.kopemar.listdetail.repository.GithubRepository
 
+/**
+ * ViewModel for RepositoryDetailActivity and its Fragments.
+ */
 class RepositoryDetailViewModel(githubRepo: GithubRepository) : BaseViewModel(githubRepo) {
 
     var repositoryName: String = "repository"

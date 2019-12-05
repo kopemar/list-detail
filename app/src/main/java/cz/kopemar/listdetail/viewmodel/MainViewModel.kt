@@ -5,6 +5,9 @@ import androidx.lifecycle.liveData
 import cz.kopemar.listdetail.model.Repository
 import cz.kopemar.listdetail.repository.GithubRepository
 
+/**
+ * ViewModel for MainActivity and its Fragments.
+ */
 class MainViewModel(githubRepo: GithubRepository) : BaseViewModel(githubRepo) {
 
     var repositories: LiveData<List<Repository>> = fetchRepositories()
